@@ -46,7 +46,7 @@ base <- standings_dataset(
 )
 
 batting <- batting_dataset(
-  dates = list(c(
+  date_list = c(
     '2022-04-30',
     '2022-05-31',
     '2022-06-30',
@@ -70,11 +70,11 @@ batting <- batting_dataset(
     '2024-10-31',
     '2025-04-30',
     '2025-05-31'
-  ))
+  )
 )
 
 #### Removing players with no at bats
-batting <- batting %>% filter(AB > 0) %>% select(-Date)
+batting <- batting %>% filter(AB > 0)
 
 ## EDA ----
 
@@ -104,14 +104,12 @@ base %>%
   ) +
   theme_classic()
 
+base %>%
+  group_by(Tm) %>%
+  summarise(Wins = max(W))
+
 ## File
 
 write_csv(base, here('reports', 'standings_data.csv'))
 
 write_csv(batting, here('reports', 'batting_Stats.csv'))
-
-try(ncaa_teams(year = most_recent_ncaa_baseball_season(), division = "1"))
-
-base %>%
-  group_by(Tm) %>%
-  summarise(Wins = max(W))
