@@ -1,0 +1,795 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(pagedown)
+library(janitor)
+library(gt)
+library(gtExtras)
+library(baseballr)
+library(tinytex)
+```
+
+```{r, echo= FALSE}
+
+batter_rank_19 <- daily_batter_bref("2019-01-01", "2019-12-31") %>%
+  clean_names() %>%
+  select(bbref_id, ba, g) %>%
+  mutate(Rank = g * ba) %>%
+  arrange(desc(Rank)) %>%
+  mutate(Percentile = round(percent_rank(Rank),3)) %>%
+  select(bbref_id,Percentile)
+  
+
+```
+
+
+```{r, echo = FALSE}
+daily_batter_bref("2019-01-01", "2019-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", ba > 0, g > 1 ) %>%
+  left_join(batter_rank_19, by = 'bbref_id') %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = `name`,
+    'Age' = age,
+    'Games' = g,
+    'Plate Appearances' = pa,
+    'At Bats' = ab,
+    'Runs' = r,
+    'Hits' = h,
+     'Strike Outs' = so,
+    'On Base Perct.' = obp,
+    'Runs Batted In' = rbi,
+    'Home Runs' = hr,
+    'Batting Avg.' = ba
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Plate Appearances',
+    'At Bats',
+    'Runs',
+    'Hits',
+     'Strike Outs',
+    'On Base Perct.',
+    'Runs Batted In',
+    'Home Runs',
+    'Batting Avg.',
+    'Percentile'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2019 Season </em>"),
+    subtitle = 'Batting Statistics'
+    
+  ) %>%
+  
+    cols_label(
+      
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Game**"),
+    `Plate Appearances` = md("**Plate Appearances**"),
+    `At Bats` = md("**At Bats**"),
+    Runs = md("**Runs**"),
+    Hits = md("**Hits**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `On Base Perct.` = md("**On Base Perct.**"),
+    `Runs Batted In` = md("**Runs Batted In**"),
+    `Home Runs` = md("**Home Runs**"),
+    `Batting Avg.` = md("**Batting Avg.**"),
+    `Percentile` = md("**Percentile**")
+
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+  
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+batter_rank_20 <- daily_batter_bref("2020-01-01", "2020-12-31") %>%
+  clean_names() %>%
+  select(bbref_id, ba, g) %>%
+  mutate(Rank = g * ba) %>%
+  arrange(desc(Rank)) %>%
+  mutate(Percentile = round(percent_rank(Rank),3)) %>%
+  select(bbref_id,Percentile)
+  
+
+```
+
+```{r, echo = FALSE}
+daily_batter_bref("2020-01-01", "2020-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", ba > 0, g > 1 ) %>%
+  left_join(batter_rank_20, by = 'bbref_id') %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = `name`,
+    'Age' = age,
+    'Games' = g,
+    'Plate Appearances' = pa,
+    'At Bats' = ab,
+    'Runs' = r,
+    'Hits' = h,
+     'Strike Outs' = so,
+    'On Base Perct.' = obp,
+    'Runs Batted In' = rbi,
+    'Home Runs' = hr,
+    'Batting Avg.' = ba
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Plate Appearances',
+    'At Bats',
+    'Runs',
+    'Hits',
+     'Strike Outs',
+    'On Base Perct.',
+    'Runs Batted In',
+    'Home Runs',
+    'Batting Avg.',
+     'Percentile'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2020 Season </em>"),
+    subtitle = 'Batting Statistics'
+    
+  ) %>%
+  
+    cols_label(
+      
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Game**"),
+    `Plate Appearances` = md("**Plate Appearances**"),
+    `At Bats` = md("**At Bats**"),
+    Runs = md("**Runs**"),
+    Hits = md("**Hits**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `On Base Perct.` = md("**On Base Perct.**"),
+    `Runs Batted In` = md("**Runs Batted In**"),
+    `Home Runs` = md("**Home Runs**"),
+    `Batting Avg.` = md("**Batting Avg.**"),
+    `Percentile` = md("**Percentile**")
+
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+batter_rank_21 <- daily_batter_bref("2021-01-01", "2021-12-31") %>%
+  clean_names() %>%
+  select(bbref_id, ba, g) %>%
+  mutate(Rank = g * ba) %>%
+  arrange(desc(Rank)) %>%
+  mutate(Percentile = round(percent_rank(Rank),3)) %>%
+  select(bbref_id,Percentile)
+  
+
+```
+
+```{r, echo = FALSE}
+daily_batter_bref("2021-01-01", "2021-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", ba > 0, g > 1 ) %>%
+  left_join(batter_rank_21, by = 'bbref_id') %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = `name`,
+    'Age' = age,
+    'Games' = g,
+    'Plate Appearances' = pa,
+    'At Bats' = ab,
+    'Runs' = r,
+    'Hits' = h,
+     'Strike Outs' = so,
+    'On Base Perct.' = obp,
+    'Runs Batted In' = rbi,
+    'Home Runs' = hr,
+    'Batting Avg.' = ba
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Plate Appearances',
+    'At Bats',
+    'Runs',
+    'Hits',
+     'Strike Outs',
+    'On Base Perct.',
+    'Runs Batted In',
+    'Home Runs',
+    'Batting Avg.',
+    'Percentile'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2021 Season </em>"),
+    subtitle = 'Batting Statistics'
+    
+  ) %>%
+  
+    cols_label(
+      
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Game**"),
+    `Plate Appearances` = md("**Plate Appearances**"),
+    `At Bats` = md("**At Bats**"),
+    Runs = md("**Runs**"),
+    Hits = md("**Hits**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `On Base Perct.` = md("**On Base Perct.**"),
+    `Runs Batted In` = md("**Runs Batted In**"),
+    `Home Runs` = md("**Home Runs**"),
+    `Batting Avg.` = md("**Batting Avg.**"),
+    `Percentile` = md("**Percentile**")
+
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo = FALSE}
+batter_rank_21 <- daily_batter_bref("2022-01-01", "2022-12-31") %>%
+  clean_names() %>%
+  select(bbref_id, ba, g) %>%
+  mutate(Rank = g * ba) %>%
+  arrange(desc(Rank)) %>%
+  mutate(Percentile = round(percent_rank(Rank),3)) %>%
+  select(bbref_id,Percentile)
+  
+
+```
+
+```{r, echo = FALSE}
+daily_batter_bref("2022-01-01", "2022-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", ba > 0, g > 1 ) %>%
+  left_join(batter_rank_21, by = 'bbref_id') %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = `name`,
+    'Age' = age,
+    'Games' = g,
+    'Plate Appearances' = pa,
+    'At Bats' = ab,
+    'Runs' = r,
+    'Hits' = h,
+     'Strike Outs' = so,
+    'On Base Perct.' = obp,
+    'Runs Batted In' = rbi,
+    'Home Runs' = hr,
+    'Batting Avg.' = ba
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Plate Appearances',
+    'At Bats',
+    'Runs',
+    'Hits',
+     'Strike Outs',
+    'On Base Perct.',
+    'Runs Batted In',
+    'Home Runs',
+    'Batting Avg.',
+    'Percentile'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2022 Season </em>"),
+    subtitle = 'Batting Statistics'
+    
+  ) %>%
+  
+    cols_label(
+      
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Game**"),
+    `Plate Appearances` = md("**Plate Appearances**"),
+    `At Bats` = md("**At Bats**"),
+    Runs = md("**Runs**"),
+    Hits = md("**Hits**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `On Base Perct.` = md("**On Base Perct.**"),
+    `Runs Batted In` = md("**Runs Batted In**"),
+    `Home Runs` = md("**Home Runs**"),
+    `Batting Avg.` = md("**Batting Avg.**"),
+    `Percentile` = md("**Percentile**")
+
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+```
+
+
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+daily_pitcher_bref("2019-01-01", "2019-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", g > 1) %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = name,
+    'Age' = age,
+    'Games' = g,
+    'Game Starts' = gs,
+    'Innings Pitched' = ip,
+    'Wins' = w,
+    'Loses' = l,
+    'Saves' = sv,
+    'Runs' = r,
+    'Earned Runs' = er, 
+    'Hits' = h,
+    'Walks' = bb,
+    'Strike Outs' = so,
+    'Home Runs' = hr,
+    'ERA' = era
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Game Starts',
+    'Innings Pitched',
+    'Wins',
+    'Loses',
+    'Saves',
+    'Runs',
+    'Earned Runs',
+    'Hits',
+    'Walks',
+    'Strike Outs',
+    'Home Runs',
+    'ERA'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2019 Season </em>"),
+    subtitle = 'Pitching Statistics'
+    
+  ) %>%
+  
+    cols_label(
+    
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Games**"),
+    `Game Starts` = md("**Game Starts**"),
+    `Innings Pitched` = md("**Innings Pitched**"),
+    `Wins` = md("**Wins**"),
+    `Loses` = md("**Loses**"),
+    Saves = md("**Saves**"),
+    Runs = md("**Runs**"),
+    `Earned Runs` = md("**Earned Runs**"),
+    Hits = md("**Hits**"),
+    Walks = md("**Walks**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `Home Runs` = md("**Home Runs**"),
+    ERA = md("**ERA**")
+    
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+daily_pitcher_bref("2020-01-01", "2020-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", g > 1 ) %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = name,
+    'Age' = age,
+    'Games' = g,
+    'Game Starts' = gs,
+    'Innings Pitched' = ip,
+    'Wins' = w,
+    'Loses' = l,
+    'Saves' = sv,
+    'Runs' = r,
+    'Earned Runs' = er, 
+    'Hits' = h,
+    'Walks' = bb,
+    'Strike Outs' = so,
+    'Home Runs' = hr,
+    'ERA' = era
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Game Starts',
+    'Innings Pitched',
+    'Wins',
+    'Loses',
+    'Saves',
+    'Runs',
+    'Earned Runs',
+    'Hits',
+    'Walks',
+    'Strike Outs',
+    'Home Runs',
+    'ERA'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2020 Season </em>"),
+    subtitle = 'Pitching Statistics'
+    
+  ) %>%
+  
+    cols_label(
+    
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Games**"),
+    `Game Starts` = md("**Game Starts**"),
+    `Innings Pitched` = md("**Innings Pitched**"),
+    `Wins` = md("**Wins**"),
+    `Loses` = md("**Loses**"),
+    Saves = md("**Saves**"),
+    Runs = md("**Runs**"),
+    `Earned Runs` = md("**Earned Runs**"),
+    Hits = md("**Hits**"),
+    Walks = md("**Walks**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `Home Runs` = md("**Home Runs**"),
+    ERA = md("**ERA**")
+    
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+daily_pitcher_bref("2021-01-01", "2021-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", g > 1) %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = name,
+    'Age' = age,
+    'Games' = g,
+    'Game Starts' = gs,
+    'Innings Pitched' = ip,
+    'Wins' = w,
+    'Loses' = l,
+    'Saves' = sv,
+    'Runs' = r,
+    'Earned Runs' = er, 
+    'Hits' = h,
+    'Walks' = bb,
+    'Strike Outs' = so,
+    'Home Runs' = hr,
+    'ERA' = era
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Game Starts',
+    'Innings Pitched',
+    'Wins',
+    'Loses',
+    'Saves',
+    'Runs',
+    'Earned Runs',
+    'Hits',
+    'Walks',
+    'Strike Outs',
+    'Home Runs',
+    'ERA'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2021 Season </em>"),
+    subtitle = 'Pitching Statistics'
+    
+  ) %>%
+  
+    cols_label(
+    
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Games**"),
+    `Game Starts` = md("**Game Starts**"),
+    `Innings Pitched` = md("**Innings Pitched**"),
+    `Wins` = md("**Wins**"),
+    `Loses` = md("**Loses**"),
+    Saves = md("**Saves**"),
+    Runs = md("**Runs**"),
+    `Earned Runs` = md("**Earned Runs**"),
+    Hits = md("**Hits**"),
+    Walks = md("**Walks**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `Home Runs` = md("**Home Runs**"),
+    ERA = md("**ERA**")
+    
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+daily_pitcher_bref("2020-01-01", "2020-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", g > 1 ) %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = name,
+    'Age' = age,
+    'Games' = g,
+    'Game Starts' = gs,
+    'Innings Pitched' = ip,
+    'Wins' = w,
+    'Loses' = l,
+    'Saves' = sv,
+    'Runs' = r,
+    'Earned Runs' = er, 
+    'Hits' = h,
+    'Walks' = bb,
+    'Strike Outs' = so,
+    'Home Runs' = hr,
+    'ERA' = era
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Game Starts',
+    'Innings Pitched',
+    'Wins',
+    'Loses',
+    'Saves',
+    'Runs',
+    'Earned Runs',
+    'Hits',
+    'Walks',
+    'Strike Outs',
+    'Home Runs',
+    'ERA'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2020 Season </em>"),
+    subtitle = 'Pitching Statistics'
+    
+  ) %>%
+  
+    cols_label(
+    
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Games**"),
+    `Game Starts` = md("**Game Starts**"),
+    `Innings Pitched` = md("**Innings Pitched**"),
+    `Wins` = md("**Wins**"),
+    `Loses` = md("**Loses**"),
+    Saves = md("**Saves**"),
+    Runs = md("**Runs**"),
+    `Earned Runs` = md("**Earned Runs**"),
+    Hits = md("**Hits**"),
+    Walks = md("**Walks**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `Home Runs` = md("**Home Runs**"),
+    ERA = md("**ERA**")
+    
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
+
+<div style="page-break-after: always"></div>
+
+```{r, echo= FALSE}
+
+daily_pitcher_bref("2022-01-01", "2022-12-31") %>% 
+  clean_names() %>%
+  filter(team == "Philadelphia", g > 1) %>%
+  arrange(desc(g)) %>%
+  rename(
+    'Player' = name,
+    'Age' = age,
+    'Games' = g,
+    'Game Starts' = gs,
+    'Innings Pitched' = ip,
+    'Wins' = w,
+    'Loses' = l,
+    'Saves' = sv,
+    'Runs' = r,
+    'Earned Runs' = er, 
+    'Hits' = h,
+    'Walks' = bb,
+    'Strike Outs' = so,
+    'Home Runs' = hr,
+    'ERA' = era
+    
+  ) %>% 
+  
+  select(
+    
+    'Player',
+    'Age',
+    'Games',
+    'Game Starts',
+    'Innings Pitched',
+    'Wins',
+    'Loses',
+    'Saves',
+    'Runs',
+    'Earned Runs',
+    'Hits',
+    'Walks',
+    'Strike Outs',
+    'Home Runs',
+    'ERA'
+    
+  ) %>%
+  
+  gt() %>%
+  
+  tab_header(
+    
+    title = html(local_image('Phillies.png'), "<em> Philadelphia Phillies 2021 Season </em>"),
+    subtitle = 'Pitching Statistics'
+    
+  ) %>%
+  
+    cols_label(
+    
+    Player = md("**Player**"),
+    Age = md("**Age**"),
+    Games = md("**Games**"),
+    `Game Starts` = md("**Game Starts**"),
+    `Innings Pitched` = md("**Innings Pitched**"),
+    `Wins` = md("**Wins**"),
+    `Loses` = md("**Loses**"),
+    Saves = md("**Saves**"),
+    Runs = md("**Runs**"),
+    `Earned Runs` = md("**Earned Runs**"),
+    Hits = md("**Hits**"),
+    Walks = md("**Walks**"),
+    `Strike Outs` = md("**Strike Outs**"),
+    `Home Runs` = md("**Home Runs**"),
+    ERA = md("**ERA**")
+    
+  ) %>%
+  
+  cols_align(
+    
+    align = "center"
+    
+  )
+
+```
