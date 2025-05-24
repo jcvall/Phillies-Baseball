@@ -4,11 +4,12 @@
 library(baseballr)
 library(tidyverse)
 library(gghighlight)
+library(mlbplotR)
+library(gt)
+library(gtExtras)
 library(janitor)
 library(here)
-library(lubridate)
 library(naniar)
-library(dlookr)
 
 
 ## function ----
@@ -39,8 +40,8 @@ base <- standings_dataset(
     '2024-08-31',
     '2024-09-30',
     '2024-10-31',
-    '2025-04-30',
-    '2025-05-31'
+    '2025-03-31',
+    '2025-04-30'
   ),
   division = 'NL East'
 )
@@ -68,8 +69,8 @@ batting <- batting_dataset(
     '2024-08-31',
     '2024-09-30',
     '2024-10-31',
-    '2025-04-30',
-    '2025-05-31'
+    '2025-03-31',
+    '2025-04-30'
   )
 )
 
@@ -92,6 +93,8 @@ eda_web_report(batting, target = "OPS")
 base %>%
   rename('Month' = Date, 'Wins' = W) %>%
   mutate(Month = as.Date(Month)) %>%
+  mutate(Year_var = year(Month), Month_var = month(Month)) %>%
+  filter(Year_var >= 2025) %>%
   ggplot(aes(y = Wins, x = Month, color = Tm)) +
   geom_line() +
   geom_smooth() +
